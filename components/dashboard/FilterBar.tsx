@@ -7,7 +7,7 @@ type Props = {
 
 export default function FilterBar({ filters, setFilters }: Props) {
   return (
-    <div className="flex gap-4 flex-wrap">
+    <div className="bg-white p-4 rounded-lg shadow-sm flex gap-4 flex-wrap">
       {/* Rating */}
       <div className="flex flex-col">
         <label htmlFor="rating" className="text-sm">Rating</label>
