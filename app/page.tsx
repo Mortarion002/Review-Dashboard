@@ -87,25 +87,51 @@ export default function HomePage() {
       </section>
 
       {/* PREVIEW SECTION */}
-      <section className="px-6 py-24 bg-zinc-900 text-white rounded-[2.5rem] mx-4 md:mx-auto max-w-7xl mb-24 shadow-2xl">
-        <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-8">
+      <section className="px-6 py-16 bg-zinc-950 text-white rounded-[2.5rem] mx-4 md:mx-auto max-w-7xl mb-24 shadow-2xl overflow-hidden relative border border-zinc-800/50">
+        {/* Subtle decorative glow */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-zinc-800/20 blur-[100px] rounded-full" />
+        
+        <div className="max-w-5xl mx-auto text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-10 tracking-tight">
             See Your Insights at a Glance
           </h2>
 
           {/* Fake Dashboard UI Skeleton */}
-          <div className="bg-zinc-800/50 backdrop-blur-md rounded-2xl border border-zinc-700/50 p-4 md:p-8 overflow-hidden shadow-2xl">
-            <div className="flex gap-4 mb-6">
-              <div className="h-8 w-8 rounded-full bg-zinc-700/50" />
-              <div className="h-8 w-32 rounded-lg bg-zinc-700/50" />
-              <div className="h-8 w-24 rounded-lg bg-zinc-700/50" />
+          <div className="bg-zinc-900/40 backdrop-blur-xl rounded-3xl border border-zinc-800 p-6 md:p-8 shadow-2xl ring-1 ring-white/5">
+            {/* Header / Nav area */}
+            <div className="flex items-center justify-between mb-8">
+              <div className="flex gap-4">
+                <div className="h-8 w-8 rounded-lg bg-zinc-800 border border-zinc-700" />
+                <div className="hidden sm:block h-8 w-32 rounded-lg bg-zinc-800/50 border border-zinc-700/50" />
+              </div>
+              <div className="h-8 w-20 rounded-lg bg-zinc-100" />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="h-32 rounded-xl bg-zinc-700/30" />
-              <div className="h-32 rounded-xl bg-zinc-700/30" />
-              <div className="h-32 rounded-xl bg-zinc-700/30" />
+
+            {/* Stats Cards area */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="h-24 rounded-2xl bg-zinc-800/40 border border-zinc-700/30 p-3 flex flex-col justify-center">
+                  <div className="h-3 w-1/2 bg-zinc-700/50 rounded-full mb-3" />
+                  <div className="h-6 w-2/3 bg-zinc-100 rounded-full" />
+                </div>
+              ))}
             </div>
-            <div className="h-64 rounded-xl bg-zinc-700/30 mt-6" />
+
+            {/* Main Content area */}
+            <div className="h-48 rounded-2xl bg-zinc-800/20 border border-zinc-700/20 p-5 flex flex-col gap-3 overflow-hidden relative">
+              <div className="h-3 w-1/4 bg-zinc-700/50 rounded-full mb-1" />
+              <div className="space-y-2">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="flex gap-3 items-center">
+                    <div className="h-3 w-3 rounded bg-zinc-700/30" />
+                    <div className="h-2 flex-1 bg-zinc-800/60 rounded-full" />
+                    <div className="h-2 w-10 bg-zinc-700/40 rounded-full" />
+                  </div>
+                ))}
+              </div>
+              {/* Fake Chart Line Mockup */}
+              <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-zinc-800/20 to-transparent border-t border-zinc-700/10" />
+            </div>
           </div>
         </div>
       </section>
