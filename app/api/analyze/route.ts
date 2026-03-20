@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { model } from "@/lib/gemini";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(req: NextRequest) {
   try {
     const body: { review: string } = await req.json();
