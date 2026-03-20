@@ -3,7 +3,8 @@ import { model } from "@/lib/gemini";
 
 export async function POST(req: NextRequest) {
   try {
-    const { review } = await req.json();
+    const body: { review: string } = await req.json();
+    const { review } = body;
 
     const prompt = `
 You are an AI that analyzes ecommerce reviews.

@@ -9,27 +9,17 @@ export async function GET(req: NextRequest) {
     const product = searchParams.get("product");
     const platform = searchParams.get("platform");
 
-    let query = "SELECT * FROM reviews WHERE 1=1";
-    const values: (string | number)[] = [];
+    const ratingVal = rating ? Number(rating) : null;
+    const productVal = product || null;
+    const platformVal = platform || null;
 
-    if (rating) {
-      values.push(Number(rating));
-      query += ` AND rating = $${values.length}`;
-    }
-
-    if (product) {
-      values.push(product);
-      query += ` AND product = $${values.length}`;
-    }
-
-    if (platform) {
-      values.push(platform);
-      query += ` AND platform = $${values.length}`;
-    }
-
-    query += " ORDER BY created_at DESC";
-
-    const result = await sql(query as unknown as TemplateStringsArray, values);
+    const result = await sql`
+      SELECT * FROM reviews 
+      WHERE (${ratingVal}::int IS NULL OR rating = ${ratingVal})
+        AND (${productVal}::text IS NULL OR product = ${productVal})
+        AND (${platformVal}::text IS NULL OR platform = ${platformVal})
+      ORDER BY created_at DESC
+    `;
 
     return NextResponse.json({
       success: true,

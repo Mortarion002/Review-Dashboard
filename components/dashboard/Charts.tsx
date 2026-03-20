@@ -18,8 +18,8 @@ type Props = {
 
 export default function Charts({ data }: Props) {
   return (
-    <div className="p-4 border rounded-lg">
-      <h2 className="text-lg font-semibold mb-4">Rating Distribution</h2>
+    <div className="bg-white border border-zinc-200 rounded-xl shadow-sm p-6">
+      <h2 className="text-lg font-semibold text-zinc-900 mb-6">Rating Distribution</h2>
 
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>

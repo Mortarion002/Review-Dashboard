@@ -1,3 +1,5 @@
+"use client";
+
 import { Filters } from "@/types/review";
 
 type Props = {
@@ -7,13 +9,13 @@ type Props = {
 
 export default function FilterBar({ filters, setFilters }: Props) {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm flex gap-4 flex-wrap">
+    <div className="bg-white border border-zinc-200 rounded-xl shadow-sm p-6 flex flex-col md:flex-row gap-6">
       {/* Rating */}
       <div className="flex flex-col">
-        <label htmlFor="rating" className="text-sm">Rating</label>
+        <label htmlFor="rating" className="text-sm font-medium text-zinc-700 mb-1.5">Rating</label>
         <select
           id="rating"
-          className="border p-2 rounded"
+          className="border border-zinc-200 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-zinc-900/20 transition-all text-zinc-900 bg-zinc-50 hover:bg-white"
           value={filters.rating}
           onChange={(e) =>
             setFilters((prev) => ({ ...prev, rating: e.target.value }))
@@ -30,10 +32,10 @@ export default function FilterBar({ filters, setFilters }: Props) {
 
       {/* Platform */}
       <div className="flex flex-col">
-        <label htmlFor="platform" className="text-sm">Platform</label>
+        <label htmlFor="platform" className="text-sm font-medium text-zinc-700 mb-1.5">Platform</label>
         <select
           id="platform"
-          className="border p-2 rounded"
+          className="border border-zinc-200 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-zinc-900/20 transition-all text-zinc-900 bg-zinc-50 hover:bg-white"
           value={filters.platform}
           onChange={(e) =>
             setFilters((prev) => ({ ...prev, platform: e.target.value }))
@@ -48,12 +50,12 @@ export default function FilterBar({ filters, setFilters }: Props) {
 
       {/* Product */}
       <div className="flex flex-col">
-        <label htmlFor="product" className="text-sm">Product</label>
+        <label htmlFor="product" className="text-sm font-medium text-zinc-700 mb-1.5">Product</label>
         <input
           id="product"
           type="text"
           placeholder="Search product..."
-          className="border p-2 rounded"
+          className="border border-zinc-200 rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-zinc-900/20 transition-all text-zinc-900 bg-zinc-50 hover:bg-white"
           value={filters.product}
           onChange={(e) =>
             setFilters((prev) => ({ ...prev, product: e.target.value }))

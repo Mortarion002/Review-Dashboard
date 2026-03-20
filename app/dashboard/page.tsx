@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import ReviewTable from "@/components/dashboard/ReviewTable";
 import FilterBar from "@/components/dashboard/FilterBar";
 import AnalyticsCards from "@/components/dashboard/AnalyticsCards";
@@ -26,34 +26,34 @@ export default function DashboardPage() {
     platform: "",
   });
 
+  const fetchReviews = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+
+      const params = new URLSearchParams();
+
+      if (filters.rating) params.append("rating", filters.rating);
+      if (filters.product) params.append("product", filters.product);
+      if (filters.platform) params.append("platform", filters.platform);
+
+      const res = await fetch(`/api/reviews?${params.toString()}`);
+
+      if (!res.ok) throw new Error("Failed to fetch reviews");
+
+      const data = await res.json();
+      setReviews(data.data || []);
+    } catch {
+      setError("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  }, [filters]);
+
   // Fetch Reviews
   useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        const params = new URLSearchParams();
-
-        if (filters.rating) params.append("rating", filters.rating);
-        if (filters.product) params.append("product", filters.product);
-        if (filters.platform) params.append("platform", filters.platform);
-
-        const res = await fetch(`/api/reviews?${params.toString()}`);
-
-        if (!res.ok) throw new Error("Failed to fetch reviews");
-
-        const data = await res.json();
-        setReviews(data.data || []);
-      } catch {
-        setError("Something went wrong");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchReviews();
-  }, [filters]);
+  }, [fetchReviews]);
 
   // Fetch Analytics
   useEffect(() => {
@@ -67,10 +67,10 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-8 min-h-screen bg-zinc-50">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Review Dashboard</h1>
-        <span className="text-sm text-gray-500">AI-powered insights</span>
+        <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900">Review Dashboard</h1>
+        <span className="text-sm font-medium text-zinc-500">AI-powered insights</span>
       </div>
 
       {/* Analytics */}

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Review } from "@/types/review";
 import { getSentiment, getIssueTags } from "@/lib/utils";
@@ -25,18 +27,18 @@ export default function ReviewTable({ reviews }: { reviews: Review[] }) {
   };
 
   return (
-    <div className="overflow-x-auto border rounded-lg">
+    <div className="bg-white border border-zinc-200 rounded-xl shadow-sm overflow-x-auto">
       <table className="w-full text-left">
-        <thead className="bg-gray-100">
+        <thead className="bg-zinc-50 border-b border-zinc-200 text-xs font-semibold tracking-wide text-zinc-500 uppercase">
           <tr>
-            <th className="p-3">Product</th>
-            <th className="p-3">Platform</th>
-            <th className="p-3">Rating</th>
-            <th className="p-3">Sentiment</th>
-            <th className="p-3">Issues</th>
-            <th className="p-3">Review</th>
-            <th className="p-3">Analyze</th>
-            <th className="p-3">Date</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Product</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Platform</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Rating</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Sentiment</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Issues</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Review</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Analyze</th>
+            <th className="px-6 py-4 border-b border-zinc-200">Date</th>
           </tr>
         </thead>
 
@@ -50,58 +52,52 @@ export default function ReviewTable({ reviews }: { reviews: Review[] }) {
             return (
               <tr
                 key={review.id}
-                className={`border-t hover:bg-gray-50 transition ${review.rating <= 2 ? "bg-red-50" : ""
-                  }`}
+                className="border-b border-zinc-100 hover:bg-zinc-50/80 transition-colors"
               >
-                <td className="p-3">{review.product}</td>
-                <td className="p-3">{review.platform}</td>
+                <td className="px-6 py-5 text-zinc-700">{review.product}</td>
+                <td className="px-6 py-5 text-zinc-700">{review.platform}</td>
 
-                <td className="p-3">{review.rating} ⭐</td>
+                <td className="px-6 py-5 font-medium text-zinc-900">{review.rating} ⭐</td>
 
                 {/* Sentiment */}
-                <td className="p-3">
+                <td className="px-6 py-5">
                   <span
-                    className={`px-2 py-1 rounded text-sm ${sentiment === "Positive"
-                      ? "bg-green-100 text-green-700"
-                      : sentiment === "Neutral"
-                        ? "bg-yellow-100 text-yellow-700"
-                        : "bg-red-100 text-red-700"
-                      }`}
+                    className="border border-zinc-200 bg-zinc-50 text-zinc-700 px-2.5 py-1 rounded-md text-xs font-medium"
                   >
                     {sentiment}
                   </span>
                 </td>
 
                 {/* Issues */}
-                <td className="p-3">
+                <td className="px-6 py-5">
                   <div className="flex gap-2 flex-wrap">
                     {issues.length > 0 ? (
                       issues.map((tag, index) => (
                         <span
                           key={index}
-                          className="px-2 py-1 bg-gray-200 rounded text-xs"
+                          className="border border-zinc-200 bg-zinc-50 text-zinc-700 px-2.5 py-1 rounded-md text-xs font-medium"
                         >
                           {tag}
                         </span>
                       ))
                     ) : (
-                      <span className="text-gray-400 text-sm">None</span>
+                      <span className="text-zinc-400 text-sm">None</span>
                     )}
                   </div>
                 </td>
 
-                <td className="p-3 max-w-xs truncate">{review.review_text}</td>
+                <td className="px-6 py-5 max-w-xs truncate text-zinc-600">{review.review_text}</td>
 
-                <td className="p-3">
+                <td className="px-6 py-5">
                   <button
-                    className="text-blue-500 text-sm"
+                    className="bg-zinc-900 text-white hover:bg-zinc-800 hover:-translate-y-0.5 transition-all shadow-md rounded-lg px-4 py-2 text-xs font-medium inline-block"
                     onClick={() => handleAnalyze(review.id, review.review_text)}
                   >
                     Analyze
                   </button>
                 </td>
 
-                <td className="p-3">
+                <td className="px-6 py-5 text-sm text-zinc-500">
                   {new Date(review.created_at).toLocaleDateString()}
                 </td>
               </tr>

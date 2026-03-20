@@ -42,5 +42,18 @@ export async function getAnalytics() {
       AVG(rating) as average_rating
     FROM reviews
   `;
-  return result[0];
+
+  const distribution = await sql`
+    SELECT 
+      rating, 
+      COUNT(*)::int as count
+    FROM reviews
+    GROUP BY rating
+    ORDER BY rating ASC
+  `;
+
+  return {
+    ...result[0],
+    distribution
+  };
 }

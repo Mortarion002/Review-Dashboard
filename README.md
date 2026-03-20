@@ -1,36 +1,386 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 AI-Powered Review Analytics Dashboard
 
-## Getting Started
+> Transform thousands of scattered eCommerce reviews into actionable insights using AI.
 
-First, run the development server:
+
+## 📌 Project Overview
+
+This project is a **full-stack AI-powered review analytics dashboard** built using modern web technologies. It helps eCommerce brand owners analyze large volumes of customer reviews by:
+
+* Centralizing reviews from multiple platforms
+* Extracting sentiment and issues
+* Providing analytics and visual insights
+* Enabling on-demand AI-powered analysis using Gemini
+
+---
+
+## 🎯 Problem Statement
+
+E-commerce businesses receive **thousands of reviews across multiple platforms** like Amazon, Flipkart, and Shopify. These reviews are:
+
+* Scattered across platforms
+* Time-consuming to analyze manually
+* Difficult to convert into actionable insights
+
+This project solves that by creating a **centralized intelligence dashboard**.
+
+---
+
+## ✨ Features
+
+### 📥 Review Management
+
+* Unified dashboard for all reviews
+* Filter by:
+
+  * Rating
+  * Product
+  * Platform
+* Search functionality
+
+---
+
+### 📊 Analytics Dashboard
+
+* Total reviews count
+* Average rating
+* Rating distribution (charts)
+
+---
+
+### 🧠 Sentiment Analysis
+
+* Rule-based sentiment classification:
+
+  * Positive
+  * Neutral
+  * Negative
+
+---
+
+### 🏷️ Issue Tagging
+
+Keyword-based issue detection:
+
+* Delivery
+* Quality
+* Packaging
+* Price
+
+---
+
+### 🤖 AI Integration (Gemini)
+
+* On-demand review analysis
+* Extracts:
+
+  * Sentiment
+  * Issues
+* Hybrid approach:
+
+  * Rule-based (fast, free)
+  * AI-based (accurate, contextual)
+
+---
+
+### 🎨 UI/UX
+
+* Modern responsive dashboard
+* Landing page with SaaS-style layout
+* Loading, error, and empty states
+* Clean and minimal design using Tailwind CSS
+
+---
+
+## 🏗️ Tech Stack
+
+### Frontend
+
+* Next.js (App Router)
+* React
+* Tailwind CSS
+
+### Backend
+
+* Next.js API Routes
+
+### Database
+
+* Neon PostgreSQL (serverless)
+
+### AI
+
+* Google Gemini API (`@google/generative-ai`)
+
+### Charts
+
+* Recharts
+
+---
+
+## 📁 Project Structure
+
+```
+review-dashboard/
+│
+├── app/
+│   ├── api/
+│   │   ├── reviews/
+│   │   ├── analytics/
+│   │   └── analyze/
+│   ├── dashboard/
+│   ├── layout.tsx
+│   └── page.tsx
+│
+├── components/
+│   ├── dashboard/
+│   │   ├── ReviewTable.tsx
+│   │   ├── FilterBar.tsx
+│   │   ├── AnalyticsCards.tsx
+│   │   ├── Charts.tsx
+│   │   └── Summary.tsx
+│
+├── lib/
+│   ├── db.ts
+│   ├── queries.ts
+│   ├── gemini.ts
+│   └── utils.ts
+│
+├── types/
+│   └── review.ts
+│
+├── scripts/
+│   └── seed.ts
+│
+├── .env.local
+├── package.json
+└── README.md
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Mortarion002/review-dashboard.git
+cd review-dashboard
+```
+
+---
+
+### 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+---
+
+### 3️⃣ Setup Environment Variables
+
+Create `.env.local`:
+
+```env
+DATABASE_URL=your_neon_database_url
+GEMINI_API_KEY=your_gemini_api_key
+```
+
+---
+
+### 4️⃣ Setup Database (Neon)
+
+Run this SQL in Neon:
+
+```sql
+CREATE TABLE reviews (
+  id SERIAL PRIMARY KEY,
+  product VARCHAR(255),
+  platform VARCHAR(100),
+  rating INT,
+  review_text TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+---
+
+### 5️⃣ Seed Data
+
+You can insert sample data manually via Neon SQL Editor.
+
+---
+
+### 6️⃣ Run Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🔌 API Endpoints
 
-To learn more about Next.js, take a look at the following resources:
+### 📥 Get Reviews
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+GET /api/reviews
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Supports query params:
 
-## Deploy on Vercel
+* `rating`
+* `product`
+* `platform`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 📊 Get Analytics
+
+```
+GET /api/analytics
+```
+
+Returns:
+
+* Total reviews
+* Average rating
+* Rating distribution
+
+---
+
+### 🤖 Analyze Review (AI)
+
+```
+POST /api/analyze
+```
+
+Body:
+
+```json
+{
+  "review": "Your review text"
+}
+```
+
+Response:
+
+```json
+{
+  "sentiment": "Positive",
+  "issues": ["Delivery"]
+}
+```
+
+---
+
+## 🧠 Key Design Decisions
+
+### 🔹 Hybrid AI Approach
+
+* Rule-based system for speed and cost efficiency
+* Gemini API for deeper contextual analysis
+
+---
+
+### 🔹 MVP-First Strategy
+
+* Focus on core features first
+* Avoid over-engineering
+* Build iteratively
+
+---
+
+### 🔹 Serverless Architecture
+
+* Next.js API routes
+* Neon serverless PostgreSQL
+
+---
+
+## 🚀 Deployment
+
+### Deploy on Vercel
+
+```bash
+npm i -g vercel
+vercel
+```
+
+Add environment variables in Vercel dashboard:
+
+* `DATABASE_URL`
+* `GEMINI_API_KEY`
+
+---
+
+## 📈 Future Improvements
+
+* Real-time review ingestion
+* Multi-platform API integrations
+* AI summary generation
+* User authentication
+* Saved AI insights
+* Pagination and performance optimization
+* Dark mode UI
+
+---
+
+## 🧠 Learning Outcomes
+
+This project demonstrates:
+
+* Full-stack development with Next.js
+* Serverless database integration (Neon)
+* API design and data aggregation
+* AI integration using LLMs (Gemini)
+* Building scalable MVP architectures
+* Product thinking and feature prioritization
+
+---
+
+## 💬 How to Present This Project
+
+> "I built an AI-powered review analytics dashboard using Next.js and Neon DB that centralizes reviews, provides real-time insights, and uses a hybrid AI approach for sentiment and issue detection."
+
+---
+
+## ⭐ Final Thoughts
+
+This project is designed as a **production-ready MVP** with a focus on:
+
+* Clean architecture
+* Real-world usability
+* Scalable design
+
+---
+
+## 📌 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙌 Acknowledgements
+
+* Next.js Team
+* Neon Database
+* Google Gemini API
+* Recharts
+
+---
+
+---
+
+## 👤 Author
+
+**GitHub:** https://github.com/Mortarion002
+
+---
