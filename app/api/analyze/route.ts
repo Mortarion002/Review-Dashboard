@@ -37,9 +37,9 @@ Review:
   } catch (error) {
     console.error("AI error:", error);
 
-    return NextResponse.json({
-      success: false,
-      error: "AI analysis failed",
-    });
+    return NextResponse.json(
+      { success: false, error: "AI analysis failed" },
+      { status: 500 }
+    );
   }
 }
