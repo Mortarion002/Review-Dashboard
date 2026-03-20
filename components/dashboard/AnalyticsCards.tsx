@@ -14,7 +14,7 @@ export default function AnalyticsCards({ total, avgRating }: Props) {
 
       <div className="bg-white border border-zinc-200 rounded-xl shadow-sm p-6">
         <h2 className="text-sm font-medium text-zinc-500">Average Rating</h2>
-        <p className="text-2xl font-bold text-zinc-900">{avgRating} ⭐</p>
+        <p className="text-2xl font-bold text-zinc-900">{Number(avgRating).toFixed(1)} ⭐</p>
       </div>
 
     </div>

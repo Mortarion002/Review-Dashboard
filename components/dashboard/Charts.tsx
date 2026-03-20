@@ -26,7 +26,7 @@ export default function Charts({ data }: Props) {
           <XAxis dataKey="rating" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="count" />
+          <Bar dataKey="count" fill="#18181b" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>

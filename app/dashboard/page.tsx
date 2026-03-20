@@ -67,7 +67,7 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-8 min-h-screen bg-zinc-50">
+    <div className="max-w-7xl w-full mx-auto p-6 md:p-8 space-y-8 min-h-screen bg-zinc-50">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-extrabold tracking-tight text-zinc-900">Review Dashboard</h1>
         <span className="text-sm font-medium text-zinc-500">AI-powered insights</span>
